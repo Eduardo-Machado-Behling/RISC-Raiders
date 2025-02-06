@@ -77,8 +77,10 @@ __renderer_drawQuad_loop:
 
 	# unrolled loop for perfomance, I ain't that dumb (made in Python)
 	lw $t2, ($t4)
+	
 	andi $t8, $t2, 0xff000000
 	beqz $t8, __renderer_drawQuad_skip0
+	
 	sw $t2, ($t9)
 	addi $t9, $t9, 4
 	addi $t4, $t4, 4
@@ -88,6 +90,7 @@ __renderer_drawQuad_skip0:
 	andi $t8, $t2, 0xff000000
 	beqz $t8, __renderer_drawQuad_skip1
 	sw $t2, ($t9)
+	
 	addi $t9, $t9, 4
 	addi $t4, $t4, 4
     
@@ -95,7 +98,8 @@ __renderer_drawQuad_skip1:
 	lw $t2, ($t4)
 	andi $t8, $t2, 0xff000000
 	beqz $t8, __renderer_drawQuad_skip2
-	sw $t2, ($t9)
+	sw  $t2, ($t9)
+
 	addi $t9, $t9, 4
 	addi $t4, $t4, 4
     
@@ -183,7 +187,7 @@ __renderer_drawQuad_skip12:
 	lw $t2, ($t4)
 	andi $t8, $t2, 0xff000000
 	beqz $t8, __renderer_drawQuad_skip13
-	sw $t2, ($t9)
+	sw  $t2, ($t9)
 	addi $t9, $t9, 4
 	addi $t4, $t4, 4
     
@@ -191,14 +195,24 @@ __renderer_drawQuad_skip13:
 	lw $t2, ($t4)
 	andi $t8, $t2, 0xff000000
 	beqz $t8, __renderer_drawQuad_skip14
-	sw $t2, ($t9)
+	sw  $t2, ($t9)
 	addi $t9, $t9, 4
 	addi $t4, $t4, 4
     
 __renderer_drawQuad_skip14:
 	lw $t2, ($t4)
-	sw $t2, ($t9)
+	andi $t8, $t2, 0xff000000
+	beqz $t8, __renderer_drawQuad_skip15
+	sw  $t2, ($t9)
+	addi $t9, $t9, 4
+	addi $t4, $t4, 4
 	
+__renderer_drawQuad_skip15:
+	lw $t2, ($t4)
+	andi $t8, $t2, 0xff000000
+	beqz $t8, __renderer_drawQuad_skip15
+	sw  $t2, ($t9)
+
 	addi $t1, $t1, 1
 	add $t7, $t7, $t5
 
