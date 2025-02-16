@@ -16,15 +16,12 @@ def convertImage(root: str, filename: str) -> bool:
     width, height = image.size
     with open(path, 'w') as f:
 
-        f.write(f"SPR_{filename.upper()}: .word\n")
+        f.write(f"SPR_{filename.upper()}:\n.half\n    {width} {height}\n.word\n    ")
         for j in range(height):
             for i in range(width):
                 px = image.getpixel((i, j))
-                if px[3] < 255:
-                    f.write(f"0x00{px[0]:02x}{px[1]:02x}{px[2]:02x} ")
-                else:
-                    f.write(f"0xff{px[0]:02x}{px[1]:02x}{px[2]:02x} ")
-            f.write('\n')
+                f.write(f"0x{px[0]:02x}{px[1]:02x}{px[2]:02x}{px[3]:02x} ")
+            f.write('\n    ')
 
     return True
 

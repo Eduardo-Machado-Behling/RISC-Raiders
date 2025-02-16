@@ -6,13 +6,13 @@
 
 .macro printFloat(%float)
 	li $v0, 2
-	move $f12, %float
+	mov.s $f12, %float
 	syscall
 .end_macro
 
 .macro printDouble(%double)
 	li $v0, 3
-	move $f12, %double
+	mov.d $f12, %double
 	syscall
 .end_macro
 
