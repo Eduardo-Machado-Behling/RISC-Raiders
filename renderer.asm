@@ -60,3 +60,9 @@ __renderer__drawSpr:
 	
 	PUSH.W($t6)
 	jr $ra
+
+
+__renderer__drawCall:
+	li $t7, BITMAP_DISPLAY_BASE
+	sw $zero, -4($t7)
+	jr $ra
