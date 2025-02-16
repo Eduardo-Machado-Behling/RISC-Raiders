@@ -28,6 +28,7 @@
 	syscall
 .end_macro
 
+
 .macro readInt(%reg)
 	li $v0, 5
 	syscall

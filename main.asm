@@ -1,11 +1,9 @@
 .include "macros/stack.s"
 .include "macros/syscalls.s"
-
-.eqv SCREEN_WIDTH 512
-.eqv SCREEN_HEIGHT 256
-.eqv BITMAP_DISPLAY_BASE 0x10080000
+.include "macros/defines.s"
 
 .eqv KEYBOARD_MMIO 0xFFFF0000
+
 .eqv VEL_X 250
 .eqv VEL_Y 200
 

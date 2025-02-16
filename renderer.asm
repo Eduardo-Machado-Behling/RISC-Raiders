@@ -1,3 +1,4 @@
+.eqv BITMAP_DISPLAY_BASE 0x10080000
 
 #TODO: draw sequencial sprite of using drawQuad
 __renderer__drawQuad:
