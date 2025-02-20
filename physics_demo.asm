@@ -10,7 +10,8 @@
 	debug_insert_ret3: .asciiz "RETURN: calling recursive on node #"
 	debug_insert_ret4: .asciiz "INFO: Foward Called"
 	debug_insert_ret5: .asciiz "INFO: Forward  called with parent = "
-	debug_insert_ret6: .asciiz "INFO: add"
+	debug_insert_ret6: .asciiz "INFO: added"
+	debug_insert_ret7: .asciiz "INFO: contains - "
 
 .eqv KEYBOARD_MMIO 0xFFFF0000
 
@@ -18,26 +19,28 @@
 .eqv VEL_Y 200
 
 .text:
-	li $s0, 0
-	
+	li $s7, 0
+	jal Physics__QuadTree__init
 loop:
-	beq $s0, 100, loop
+	beq $s7, 100, loopEnd
 	
+	printInt($s7)
+	printCharI('\n')
 	randRange($t3, 0, 200)
 	randRange($t4, 0, 200)
 	randRange($t0, 0, SCREEN_WIDTH)
 	randRange($t1, 0, SCREEN_HEIGHT)
-	PUSH.H($t0)
 	PUSH.H($t1)
+	PUSH.H($t0)
 	PUSH.H($t3)
 	PUSH.H($t4)
 	jal create_hitbox
 	POP.W($s0)
 	
 	PUSH.W($s0)
-	jal __physics__QuadTree__insert
+	jal Physics__QuadTree__insert
 	
-	addi $s0, $s0, 1
+	addi $s7, $s7, 1
 	j loop
 loopEnd:
 	exit()
