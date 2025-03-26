@@ -47,6 +47,6 @@
 .end_macro 
 
 .macro PUSHI.W(%word)
-    li $k0, %word          # Use $k0 instead of $t9 to avoid conflicts
+    addi $k0, $0,  %word          # Use $k0 instead of $t9 to avoid conflicts
     PUSH.W($k0)
 .end_macro 

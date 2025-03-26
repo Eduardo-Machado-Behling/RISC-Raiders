@@ -29,6 +29,34 @@ __renderer__drawQuad:
 	PUSH.W($t6)
 	jr $ra
 	
+__renderer__remove:
+	POP.W($t0)
+
+	li $t7, BITMAP_DISPLAY_BASE
+	lw $t9, ($t7)
+	addi $t3, $t9, -1
+	sll $t6, $t3, 4
+	add $t6, $t6, $t7
+	add $t6, $t6, 4
+
+	lh $t8, 0($t6)
+	sh $t8, 0($t0)
+	lh $t8, 2($t6)
+	sh $t8, 2($t0)
+	lh $t8, 4($t6)
+	sh $t8, 4($t0)
+	lh $t8, 6($t6)
+	sh $t8, 6($t0)
+	lh $t8, 8($t6)
+	sh $t8, 8($t0)
+	lh $t8, 10($t6)
+	sh $t8, 10($t0)
+	lw $t8, 12($t6)
+	sw $t8, 12($t0)
+
+	sw $t3 ($t7)
+	jr $ra
+	
 __renderer__drawSpr:
 	POP.W($t5)    # spr_addr (use la)
 	POP.H($t4)	  # rotation
